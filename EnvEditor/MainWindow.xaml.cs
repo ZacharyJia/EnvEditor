@@ -92,7 +92,6 @@ namespace EnvEditor
 
         public void EditingResult(string originName, string newName, string value)
         {
-            MessageBox.Show(originName + " " + newName + " " + value);
             if (originName == null || originName == "")
             {
                 envList.Add(new EnvVar(newName, value));
