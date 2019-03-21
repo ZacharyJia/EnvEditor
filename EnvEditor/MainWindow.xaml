@@ -5,8 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EnvEditor"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
+        Title="环境变量切换器" Height="600" Width="800">
+    <Window.Resources>
+        <Style x:Key="itemstyle" TargetType="{x:Type ListViewItem}">
+            <EventSetter Event="MouseDoubleClick" Handler="OpenVarEditor"></EventSetter>
+        </Style>
         
+        <Style x:Key="ListViewValueHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
+            <Setter Property="HorizontalContentAlignment"  Value="Left"></Setter>
+        </Style>
+
+    </Window.Resources>
+    <Grid>
+        <Button x:Name="BtnLoadCurrent" Content="加载当前用户环境变量" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="150"  Height="30" Click="BtnLoadCurrent_Click"/>
+        <Button x:Name="BtnSave" Content="保存环境变量配置" HorizontalAlignment="Left" Margin="170,10,0,0" VerticalAlignment="Top" Width="150" Height="30" Click="BtnSave_Click"/>
+        <Button x:Name="BtnLoad" Content="加载环境变量配置" HorizontalAlignment="Left" Margin="330,10,0,0" VerticalAlignment="Top" Width="150" Height="30" Click="BtnLoad_Click"/>
+        <Button x:Name="BtnApply" Content="应用环境变量配置" HorizontalAlignment="Left" Margin="490,10,0,0" VerticalAlignment="Top" Width="150" Height="30" Click="BtnApply_Click"/>
+
+        <ListView x:Name="EnvListView" Margin="10,54,10,10" ItemsSource="{Binding EnvList}" ItemContainerStyle="{StaticResource itemstyle}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="名称" Width="100" DisplayMemberBinding="{Binding Key}"/>
+                    <GridViewColumn Header="值" DisplayMemberBinding="{Binding Value}"/>
+                </GridView>
+            </ListView.View>
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="增加" Click="AddVar"></MenuItem>
+                    <MenuItem Header="删除" Click="DeleteVar"></MenuItem>
+                </ContextMenu>
+            </ListView.ContextMenu>
+        </ListView>
+
     </Grid>
+
 </Window>
+
+    
